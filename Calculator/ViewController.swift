@@ -12,6 +12,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
     
     var userIsInTheMiddleOfTypingANumber = false
+    var dotInNumber = false
     
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
@@ -20,6 +21,7 @@ class CalculatorViewController: UIViewController {
         } else {
             display.text = digit
             userIsInTheMiddleOfTypingANumber = true
+            dotInNumber = false
         }
         println("digit = \(digit)")
     }
@@ -58,6 +60,14 @@ class CalculatorViewController: UIViewController {
         println("operandStack = \(operandStack)")
     }
     
+    @IBAction func dot() {
+        if (!dotInNumber) {
+            display.text = display.text! + "."
+            userIsInTheMiddleOfTypingANumber = true
+            dotInNumber = true
+        }
+    }
+    
     var displayValue: Double {
         get {
             return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
@@ -65,6 +75,7 @@ class CalculatorViewController: UIViewController {
         set {
             display.text = "\(newValue)"
             userIsInTheMiddleOfTypingANumber = false
+            dotInNumber = true
         }
     }
 }
