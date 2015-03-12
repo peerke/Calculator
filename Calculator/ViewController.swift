@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Darwin
 
 class CalculatorViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
@@ -34,6 +35,8 @@ class CalculatorViewController: UIViewController {
         case "−": performOperation() {$1 - $0}
         case "+": performOperation() {$1 + $0}
         case "√": performOperation() {sqrt($0)}
+        case "Sin": performOperation() {sin($0)}
+        case "Cos": performOperation() {cos($0)}
         default: break
         }
     }
@@ -66,6 +69,15 @@ class CalculatorViewController: UIViewController {
             userIsInTheMiddleOfTypingANumber = true
             dotInNumber = true
         }
+    }
+    
+    @IBAction func pi() {
+        if userIsInTheMiddleOfTypingANumber {
+            enter()
+        }
+        
+        displayValue = M_PI
+        enter()
     }
     
     var displayValue: Double {
