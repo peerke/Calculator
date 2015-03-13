@@ -11,6 +11,7 @@ import Darwin
 
 class CalculatorViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
+    @IBOutlet weak var history: UILabel!
     
     var userIsInTheMiddleOfTypingANumber = false
     var dotInNumber = false
@@ -55,7 +56,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    var operandStack = Array<Double>()
+    var operandStack = [Double]()
     @IBAction func enter() {
         userIsInTheMiddleOfTypingANumber = false
         
@@ -78,6 +79,11 @@ class CalculatorViewController: UIViewController {
         
         displayValue = M_PI
         enter()
+    }
+    
+    @IBAction func clear() {
+        displayValue = 0
+        operandStack = [Double]()
     }
     
     var displayValue: Double {
